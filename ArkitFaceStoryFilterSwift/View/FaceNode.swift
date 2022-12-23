@@ -22,16 +22,19 @@ class FaceNode: SCNNode {
     }
 }
 
-// MARK: - Custom functions
 
 extension FaceNode {
+    
     
     func updatePosition(for vectors: [vector_float3]) {
         let newPos = vectors.reduce(vector_float3(), +) / Float(vectors.count)
         position = SCNVector3(newPos)
     }
     
+    
+    //clicked
     func next() {
+        
         index = (index + 1) % options.count
         
         if let plane = geometry as? SCNPlane {

@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     }
     
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -50,7 +51,6 @@ class ViewController: UIViewController {
     }
     
     
-    
     func updateFeatures(for node: SCNNode, using anchor: ARFaceAnchor) {
         print(featureIndices)
         for (feature, indices) in zip(features, featureIndices) {
@@ -68,6 +68,10 @@ extension ViewController: ARSCNViewDelegate {
         
         let device: MTLDevice!
         device = MTLCreateSystemDefaultDevice()
+        
+        
+        
+        //face anchor done.
         guard let faceAnchor = anchor as? ARFaceAnchor else {
             return nil
         }
