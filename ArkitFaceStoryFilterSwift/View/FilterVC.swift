@@ -9,12 +9,11 @@ import SceneKit
 import ARKit
 import SpriteKit
 
-class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate{
     
     @IBOutlet weak var sceneView: ARSCNView!
     
-    var filterName = ""  //table sayfasından seçilen yüz noktası.
-    
+    var filterName: String = ""  //table sayfasından seçilen yüz noktası.
     
     
     let noseOptions = ["nose01", "nose02", "nose03", "nose04", "nose05", "nose06", "nose07", "nose08", "nose09"]
@@ -26,7 +25,6 @@ class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigat
         super.viewDidLoad()
         
         sceneView.delegate = self
-        
         sceneView.isUserInteractionEnabled = true //tiklanabilir yaptik.
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
@@ -39,8 +37,8 @@ class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigat
         navigationController?.navigationBar.topItem?.rightBarButtonItem =  UIBarButtonItem(title: "Save Photo", style: .plain, target: self, action: #selector(savePhoto))
         
         
-        print("Secilen yüz noktası  :" , filterName)
         
+        print("Secilen yüz noktası  :" , filterName)
         
         
     }
@@ -81,6 +79,8 @@ class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.tabBarController?.delegate = self
+        
         let configuratio = ARFaceTrackingConfiguration()
         
         sceneView.session.run(configuratio)
@@ -106,6 +106,20 @@ class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigat
      }
      */
     
+    
+    @IBAction func backClicked(_ sender: Any) {
+        print("clicked")
+        self.performSegue(withIdentifier: "toTableViewVC", sender: nil)
+        
+        
+    }
+    
+    
+    @IBAction func SaveClicked(_ sender: Any) {
+        
+        //firebase'e eklenecek.
+        print("save photos")
+    }
     
     
     

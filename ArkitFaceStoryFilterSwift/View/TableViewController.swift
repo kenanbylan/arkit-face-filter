@@ -31,11 +31,12 @@ class TableViewController: UIViewController ,UITableViewDelegate, UITableViewDat
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toSceneView" {
-            let destinationVC = segue.destination as? FilterVC
-            print("destination : ", destinationVC ?? "Error" )
-            destinationVC!.filterName  = selectFilterName
+            //let destinationVC = segue.destination
+            if  let destinationVC = segue.destination as? FilterVC {
+                print("destination vc :",destinationVC)
+                destinationVC.filterName = selectFilterName
+            }
         }
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
