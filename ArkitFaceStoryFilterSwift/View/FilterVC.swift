@@ -1,17 +1,18 @@
 //
-//  ViewController.swift
+//  FilterVC.swift
 //  ArkitFaceStoryFilterSwift
 //
-//  Created by Kenan Baylan on 21.12.2022.
+//  Created by Kenan Baylan on 27.12.2022.
 //
 
-
 import UIKit
+import SceneKit
 import ARKit
 
-class ViewController: UIViewController {
+class FilterVC: UIViewController {
     
-    @IBOutlet var sceneView: ARSCNView!
+    
+    @IBOutlet weak var sceneView: SCNView!
     
     let noseOptions = ["nose01", "nose02", "nose03", "nose04", "nose05", "nose06", "nose07", "nose08", "nose09"]
     let features = ["nose"]
@@ -22,7 +23,42 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         sceneView.delegate = self
+        
+        
+        let refresh = UIBarButtonItem(title: "Refresh", style: UIBarButtonItem.Style.plain, target: self, action: #selector(refresh))
+        
+        let savePhoto = UIBarButtonItem(title: "Save Photo", style: .plain, target: self, action: #selector(savePhoto))
+
+        navigationItem.rightBarButtonItems = [refresh, savePhoto]
+        
+        
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        sceneView.addGestureRecognizer(tap)
+        
     }
+    
+    
+    @objc func refresh(){
+        //refresh
+    }
+    
+    @objc func savePhoto(){
+        //savePhoto
+    }
+    
+    
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        
+        let location = sender!.location(in: sceneView)
+        let results = sceneView.hitTest(location, options: nil)
+        if let result = results.first,
+            let node = result.node as? FaceNode {
+            node.next()
+        }
+    }
+
     
     
     
@@ -41,6 +77,9 @@ class ViewController: UIViewController {
         sceneView.session.pause()
     }
     
+        
+    
+    /*
     @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
         let location = sender.location(in: sceneView)
         let results = sceneView.hitTest(location, options: nil)
@@ -49,6 +88,9 @@ class ViewController: UIViewController {
             node.next()
         }
     }
+      */
+    
+    
     
     
     func updateFeatures(for node: SCNNode, using anchor: ARFaceAnchor) {
@@ -62,7 +104,7 @@ class ViewController: UIViewController {
     
 }
 
-extension ViewController: ARSCNViewDelegate {
+extension FilterVC: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, nodeFor anchor: ARAnchor) -> SCNNode? {
         
@@ -102,6 +144,5 @@ extension ViewController: ARSCNViewDelegate {
         updateFeatures(for: node, using: faceAnchor)
     }
     
-    
-}
 
+}

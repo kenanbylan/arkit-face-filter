@@ -1,13 +1,13 @@
 //
-//  SelectTable.swift
+//  DiscoverVC.swift
 //  ArkitFaceStoryFilterSwift
 //
-//  Created by Kenan Baylan on 22.12.2022.
+//  Created by Kenan Baylan on 27.12.2022.
 //
 
 import UIKit
 
-class SelectTableVC: UIViewController {
+class DiscoverVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

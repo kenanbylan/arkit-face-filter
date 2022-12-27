@@ -1,39 +1,36 @@
-//
-//  LoginVC.swift
-//  ArkitFaceStoryFilterSwift
-//
-//  Created by Kenan Baylan on 22.12.2022.
-//
 
 import UIKit
 import FirebaseAuth
 import Firebase
 
+
 class LoginVC: UIViewController {
     
-    @IBOutlet weak var usernameTextField: UITextField!
+    
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
+    @IBOutlet weak var usernameTextField: UITextField!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-      
+        
         
     }
     
     
     @IBAction func loginClicked(_ sender: Any) {
         
-        if usernameTextField.text != nil  && passwordTextField.text != nil {
+        if emailTextField.text != nil  && passwordTextField.text != nil {
             
-            Auth.auth().signIn(withEmail: usernameTextField.text!, password: passwordTextField.text!) { result, error in
+            Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) { result, error in
                 
                 if error != nil {
                     self.makeAlert(title: "Error", message: error?.localizedDescription ?? "Error")
@@ -47,11 +44,10 @@ class LoginVC: UIViewController {
     
     
     @IBAction func SignUpClicked(_ sender: Any) {
-        if usernameTextField.text != nil  && passwordTextField.text != nil {
-            Auth.auth().createUser(withEmail: usernameTextField.text!, password: passwordTextField.text!)
+        
+        if emailTextField.text != nil  && passwordTextField.text != nil {
+            Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!)
         }
-        
-        
     }
     
     
