@@ -3,16 +3,19 @@
 //  ArkitFaceStoryFilterSwift
 //
 //  Created by Kenan Baylan on 27.12.2022.
-//
 
 import UIKit
 import SceneKit
 import ARKit
+import SpriteKit
 
-class FilterVC: UIViewController {
+class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
+    @IBOutlet weak var sceneView: ARSCNView!
+    
+    var filterName = ""  //table sayfasından seçilen yüz noktası.
     
     
-    @IBOutlet weak var sceneView: SCNView!
     
     let noseOptions = ["nose01", "nose02", "nose03", "nose04", "nose05", "nose06", "nose07", "nose08", "nose09"]
     let features = ["nose"]
@@ -24,41 +27,54 @@ class FilterVC: UIViewController {
         
         sceneView.delegate = self
         
+        sceneView.isUserInteractionEnabled = true //tiklanabilir yaptik.
         
-        let refresh = UIBarButtonItem(title: "Refresh", style: UIBarButtonItem.Style.plain, target: self, action: #selector(refresh))
-        
-        let savePhoto = UIBarButtonItem(title: "Save Photo", style: .plain, target: self, action: #selector(savePhoto))
-
-        navigationItem.rightBarButtonItems = [refresh, savePhoto]
-        
-        
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         sceneView.addGestureRecognizer(tap)
+        
+        
+        navigationController?.navigationBar.topItem?.leftBarButtonItem =  UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
+        
+        
+        navigationController?.navigationBar.topItem?.rightBarButtonItem =  UIBarButtonItem(title: "Save Photo", style: .plain, target: self, action: #selector(savePhoto))
+        
+        
+        print("Secilen yüz noktası  :" , filterName)
+        
+        
         
     }
     
     
-    @objc func refresh(){
+    @objc func back(){
         //refresh
+        self.dismiss(animated: true)
+        print("refresh")
     }
     
     @objc func savePhoto(){
         //savePhoto
+        print("save ")
+        // self.dismiss(animated: true)
     }
     
     
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        
+        print("clicked.")
+        
         let location = sender!.location(in: sceneView)
         let results = sceneView.hitTest(location, options: nil)
         if let result = results.first,
-            let node = result.node as? FaceNode {
+           let node = result.node as? FaceNode {
             node.next()
         }
     }
-
+    
     
     
     
@@ -77,18 +93,18 @@ class FilterVC: UIViewController {
         sceneView.session.pause()
     }
     
-        
+    
     
     /*
-    @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
-        let location = sender.location(in: sceneView)
-        let results = sceneView.hitTest(location, options: nil)
-        if let result = results.first,
-            let node = result.node as? FaceNode {
-            node.next()
-        }
-    }
-      */
+     @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
+     let location = sender.location(in: sceneView)
+     let results = sceneView.hitTest(location, options: nil)
+     if let result = results.first,
+     let node = result.node as? FaceNode {
+     node.next()
+     }
+     }
+     */
     
     
     
@@ -119,7 +135,7 @@ extension FilterVC: ARSCNViewDelegate {
         }
         let faceGeometry = ARSCNFaceGeometry(device: device)
         let node = SCNNode(geometry: faceGeometry)
-                node.geometry?.firstMaterial?.fillMode = .lines
+        node.geometry?.firstMaterial?.fillMode = .lines
         //node.geometry?.firstMaterial?.transparency = 0.0
         
         let noseNode = FaceNode(with: noseOptions)
@@ -135,14 +151,14 @@ extension FilterVC: ARSCNViewDelegate {
         _ renderer: SCNSceneRenderer,
         didUpdate node: SCNNode,
         for anchor: ARAnchor) {
-        guard let faceAnchor = anchor as? ARFaceAnchor,
-            let faceGeometry = node.geometry as? ARSCNFaceGeometry else {
+            guard let faceAnchor = anchor as? ARFaceAnchor,
+                  let faceGeometry = node.geometry as? ARSCNFaceGeometry else {
                 return
+            }
+            
+            faceGeometry.update(from: faceAnchor.geometry)
+            updateFeatures(for: node, using: faceAnchor)
         }
-        
-        faceGeometry.update(from: faceAnchor.geometry)
-        updateFeatures(for: node, using: faceAnchor)
-    }
     
-
+    
 }
