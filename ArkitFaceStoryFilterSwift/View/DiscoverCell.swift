@@ -8,12 +8,10 @@ import UIKit
 
 class DiscoverCell: UITableViewCell {
     
+  
+    
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var imageViewCell: UIImageView!
-    
-    
-    
-    
     
     
     override func awakeFromNib() {

@@ -10,6 +10,7 @@
 		6E14AAC6295AFBB300AD54FD /* DiscoverVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E14AAC5295AFBB300AD54FD /* DiscoverVC.swift */; };
 		6E14AAC8295AFBD000AD54FD /* FilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E14AAC7295AFBD000AD54FD /* FilterVC.swift */; };
 		6E14AACA295AFC5700AD54FD /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E14AAC9295AFC5700AD54FD /* SettingsVC.swift */; };
+		6E459DED295C54D9001F629B /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E459DEC295C54D9001F629B /* WebService.swift */; };
 		6E5B6F54295776FE000E04E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E5B6F53295776FD000E04E2 /* GoogleService-Info.plist */; };
 		6E5B6F57295777BE000E04E2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 6E5B6F56295777BE000E04E2 /* FirebaseAnalytics */; };
 		6E5B6F59295777BE000E04E2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 6E5B6F58295777BE000E04E2 /* FirebaseAuth */; };
@@ -22,6 +23,7 @@
 		6E7290AA295B32D7003218AF /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7290A9295B32D7003218AF /* TableViewController.swift */; };
 		6E7290AC295B6EE4003218AF /* DiscoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7290AB295B6EE4003218AF /* DiscoverCell.swift */; };
 		6E7C9408295435020027DA21 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C9407295435020027DA21 /* LoginVC.swift */; };
+		6E945CB7295C19B6000770E2 /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E945CB6295C19B6000770E2 /* Node.swift */; };
 		6E9B7D3F2953829D003DFF20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B7D3E2953829D003DFF20 /* AppDelegate.swift */; };
 		6E9B7D412953829D003DFF20 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B7D402953829D003DFF20 /* SceneDelegate.swift */; };
 		6E9B7D462953829D003DFF20 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9B7D442953829D003DFF20 /* Main.storyboard */; };
@@ -34,12 +36,14 @@
 		6E14AAC5295AFBB300AD54FD /* DiscoverVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverVC.swift; sourceTree = "<group>"; };
 		6E14AAC7295AFBD000AD54FD /* FilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterVC.swift; sourceTree = "<group>"; };
 		6E14AAC9295AFC5700AD54FD /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		6E459DEC295C54D9001F629B /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		6E5B6F53295776FD000E04E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6E5B6F622957815C000E04E2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6E5B6F652957831D000E04E2 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		6E7290A9295B32D7003218AF /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		6E7290AB295B6EE4003218AF /* DiscoverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCell.swift; sourceTree = "<group>"; };
 		6E7C9407295435020027DA21 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		6E945CB6295C19B6000770E2 /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		6E9B7D3B2953829D003DFF20 /* ArkitFaceStoryFilterSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArkitFaceStoryFilterSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E9B7D3E2953829D003DFF20 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E9B7D402953829D003DFF20 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +74,7 @@
 		6E14AAC3295AF82E00AD54FD /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				6E459DEC295C54D9001F629B /* WebService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -93,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				6E5B6F622957815C000E04E2 /* User.swift */,
+				6E945CB6295C19B6000770E2 /* Node.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -104,8 +110,8 @@
 				6E9B7D3E2953829D003DFF20 /* AppDelegate.swift */,
 				6E9B7D402953829D003DFF20 /* SceneDelegate.swift */,
 				6E7C9407295435020027DA21 /* LoginVC.swift */,
-				6E14AAC5295AFBB300AD54FD /* DiscoverVC.swift */,
 				6E14AAC7295AFBD000AD54FD /* FilterVC.swift */,
+				6E14AAC5295AFBB300AD54FD /* DiscoverVC.swift */,
 				6E7290AB295B6EE4003218AF /* DiscoverCell.swift */,
 				6E14AAC9295AFC5700AD54FD /* SettingsVC.swift */,
 				6E7290A9295B32D7003218AF /* TableViewController.swift */,
@@ -229,9 +235,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E459DED295C54D9001F629B /* WebService.swift in Sources */,
 				6E14AACA295AFC5700AD54FD /* SettingsVC.swift in Sources */,
 				6E14AAC8295AFBD000AD54FD /* FilterVC.swift in Sources */,
 				6E7290AC295B6EE4003218AF /* DiscoverCell.swift in Sources */,
+				6E945CB7295C19B6000770E2 /* Node.swift in Sources */,
 				6E9B7D3F2953829D003DFF20 /* AppDelegate.swift in Sources */,
 				6E7290AA295B32D7003218AF /* TableViewController.swift in Sources */,
 				6E9B7D53295382DE003DFF20 /* FaceNode.swift in Sources */,

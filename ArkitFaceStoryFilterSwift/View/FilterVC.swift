@@ -9,20 +9,24 @@ import SceneKit
 import ARKit
 import SpriteKit
 
+
 class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate{
+    
+    
     
     @IBOutlet weak var sceneView: ARSCNView!
     
-    var filterName: String = ""  //table sayfasından seçilen yüz noktası.
+    var filterName: String? = nil  //table sayfasından seçilen yüz noktası.
     
     
     let noseOptions = ["nose01", "nose02", "nose03", "nose04", "nose05", "nose06", "nose07", "nose08", "nose09"]
     let features = ["nose"]
-    var featureIndices = [[6]]
+    var featureIndices = [[6]]  //for nose
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         sceneView.delegate = self
         sceneView.isUserInteractionEnabled = true //tiklanabilir yaptik.
@@ -31,29 +35,23 @@ class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigat
         sceneView.addGestureRecognizer(tap)
         
         
-        navigationController?.navigationBar.topItem?.leftBarButtonItem =  UIBarButtonItem(title: "Back", style: UIBarButtonItem.Style.plain, target: self, action: #selector(back))
-        
-        
         navigationController?.navigationBar.topItem?.rightBarButtonItem =  UIBarButtonItem(title: "Save Photo", style: .plain, target: self, action: #selector(savePhoto))
         
         
-        
-        print("Secilen yüz noktası  :" , filterName)
-        
+        if let filterName = filterName {
+            print("Secilen yüz noktası  :" , filterName)
+        }
         
     }
     
     
-    @objc func back(){
-        //refresh
-        self.dismiss(animated: true)
-        print("refresh")
-    }
     
     @objc func savePhoto(){
         //savePhoto
-        print("save ")
-        // self.dismiss(animated: true)
+        print("add photo and select index = 0.")
+        
+        
+        
     }
     
     
@@ -63,7 +61,7 @@ class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigat
         let picker = UIImagePickerController()
         picker.delegate = self
         
-        print("clicked.")
+        print("clicked handle tap ")
         
         let location = sender!.location(in: sceneView)
         let results = sceneView.hitTest(location, options: nil)
@@ -107,24 +105,12 @@ class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigat
      */
     
     
-    @IBAction func backClicked(_ sender: Any) {
-        print("clicked")
-        self.performSegue(withIdentifier: "toTableViewVC", sender: nil)
-        
-        
-    }
     
-    
-    @IBAction func SaveClicked(_ sender: Any) {
-        
-        //firebase'e eklenecek.
-        print("save photos")
-    }
     
     
     
     func updateFeatures(for node: SCNNode, using anchor: ARFaceAnchor) {
-        print(featureIndices)
+        print("featureIndices :" ,featureIndices)
         for (feature, indices) in zip(features, featureIndices) {
             let child = node.childNode(withName: feature, recursively: false) as? FaceNode
             let vertices = indices.map { anchor.geometry.vertices[$0] }
