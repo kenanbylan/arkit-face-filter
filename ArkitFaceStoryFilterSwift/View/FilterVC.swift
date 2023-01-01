@@ -15,7 +15,7 @@ class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigat
     
     
     @IBOutlet weak var sceneView: ARSCNView!
-    
+    @IBOutlet weak var collectionView: UICollectionView!
     var filterName: String? = nil  //table sayfasından seçilen yüz noktası.
     
     
@@ -27,6 +27,15 @@ class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: 100, height: 100)
+        layout.scrollDirection = .horizontal
+        
+        collectionView.collectionViewLayout = layout
+        collectionView.register(FilterCollectionViewCell.nib(), forCellWithReuseIdentifier: FilterCollectionViewCell.identifier)
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         sceneView.delegate = self
         sceneView.isUserInteractionEnabled = true //tiklanabilir yaptik.
@@ -159,6 +168,27 @@ extension FilterVC: ARSCNViewDelegate {
             faceGeometry.update(from: faceAnchor.geometry)
             updateFeatures(for: node, using: faceAnchor)
         }
+    
+    
+}
+
+extension FilterVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        print("123")
+    }
+}
+
+extension FilterVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterCollectionViewCell.identifier, for: indexPath) as! FilterCollectionViewCell
+        cell.configure(with: UIImage(named: "nose01")!)
+        return cell
+    }
     
     
 }
