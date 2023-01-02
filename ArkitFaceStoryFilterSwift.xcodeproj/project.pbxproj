@@ -30,8 +30,8 @@
 		6E9B7D482953829E003DFF20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E9B7D472953829E003DFF20 /* Assets.xcassets */; };
 		6E9B7D4B2953829E003DFF20 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9B7D492953829E003DFF20 /* LaunchScreen.storyboard */; };
 		6E9B7D53295382DE003DFF20 /* FaceNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9B7D52295382DE003DFF20 /* FaceNode.swift */; };
-		A249B3192961831F00CE82B4 /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A249B3172961831F00CE82B4 /* FilterCollectionViewCell.swift */; };
 		A249B31A2961831F00CE82B4 /* FilterCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A249B3182961831F00CE82B4 /* FilterCollectionViewCell.xib */; };
+		A249B31B296209CE00CE82B4 /* FilterCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A249B3172961831F00CE82B4 /* FilterCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -248,7 +248,7 @@
 				6E7290AC295B6EE4003218AF /* DiscoverCell.swift in Sources */,
 				6E945CB7295C19B6000770E2 /* Node.swift in Sources */,
 				6E9B7D3F2953829D003DFF20 /* AppDelegate.swift in Sources */,
-				A249B3192961831F00CE82B4 /* FilterCollectionViewCell.swift in Sources */,
+				A249B31B296209CE00CE82B4 /* FilterCollectionViewCell.swift in Sources */,
 				6E7290AA295B32D7003218AF /* TableViewController.swift in Sources */,
 				6E9B7D53295382DE003DFF20 /* FaceNode.swift in Sources */,
 				6E9B7D412953829D003DFF20 /* SceneDelegate.swift in Sources */,

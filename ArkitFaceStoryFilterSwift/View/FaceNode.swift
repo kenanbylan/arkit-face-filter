@@ -2,16 +2,16 @@ import SceneKit
 
 class FaceNode: SCNNode {
     
-    var options: [String]
+    var node: Node
     var index = 0
     
-    init(with options: [String], width: CGFloat = 0.06, height: CGFloat = 0.06) {
-        self.options = options
+    init(with node: Node, width: CGFloat = 0.06, height: CGFloat = 0.06) {
+        self.node = node
         
         super.init()
         
         let plane = SCNPlane(width: width, height: height)
-        plane.firstMaterial?.diffuse.contents =  UIImage(named: options.first!)
+        plane.firstMaterial?.diffuse.contents =  self.node.image
         plane.firstMaterial?.isDoubleSided = true
         
         geometry = plane
@@ -34,12 +34,10 @@ extension FaceNode {
     
     
     //clicked
-    func next() {
-        
-        index = (index + 1) % options.count
-        
+    func change(node: Node) {
+        self.node = node
         if let plane = geometry as? SCNPlane {
-            plane.firstMaterial?.diffuse.contents = UIImage(named: options[index])
+            plane.firstMaterial?.diffuse.contents = self.node.image
             plane.firstMaterial?.isDoubleSided = true
         }
     }

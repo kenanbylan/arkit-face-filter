@@ -12,17 +12,13 @@ import SpriteKit
 
 class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate{
     
-    
-    
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var collectionView: UICollectionView!
     var filterName: String? = nil  //table sayfasından seçilen yüz noktası.
     
-    
-    let noseOptions = ["nose01", "nose02", "nose03", "nose04", "nose05", "nose06", "nose07", "nose08", "nose09"]
+    var node = FaceNode(with: nodes[0])
     let features = ["nose"]
     var featureIndices = [[6]]  //for nose
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,10 +35,6 @@ class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigat
         
         sceneView.delegate = self
         sceneView.isUserInteractionEnabled = true //tiklanabilir yaptik.
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        sceneView.addGestureRecognizer(tap)
-        
         
         navigationController?.navigationBar.topItem?.rightBarButtonItem =  UIBarButtonItem(title: "Save Photo", style: .plain, target: self, action: #selector(savePhoto))
         
@@ -62,26 +54,6 @@ class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigat
         
         
     }
-    
-    
-    
-    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        
-        print("clicked handle tap ")
-        
-        let location = sender!.location(in: sceneView)
-        let results = sceneView.hitTest(location, options: nil)
-        if let result = results.first,
-           let node = result.node as? FaceNode {
-            node.next()
-        }
-    }
-    
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -147,9 +119,9 @@ extension FilterVC: ARSCNViewDelegate {
         node.geometry?.firstMaterial?.fillMode = .lines
         //node.geometry?.firstMaterial?.transparency = 0.0
         
-        let noseNode = FaceNode(with: noseOptions)
-        noseNode.name = "nose"
-        node.addChildNode(noseNode)
+        let noseNode = FaceNode(with: nodes[0])
+        self.node.name = "nose"
+        node.addChildNode(self.node)
         
         updateFeatures(for: node, using: faceAnchor)
         
@@ -175,18 +147,18 @@ extension FilterVC: ARSCNViewDelegate {
 extension FilterVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        print("123")
+        self.node.change(node: nodes[indexPath.row])
     }
 }
 
 extension FilterVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return nodes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterCollectionViewCell.identifier, for: indexPath) as! FilterCollectionViewCell
-        cell.configure(with: UIImage(named: "nose01")!)
+        cell.configure(with: nodes[indexPath.row].image)
         return cell
     }
     

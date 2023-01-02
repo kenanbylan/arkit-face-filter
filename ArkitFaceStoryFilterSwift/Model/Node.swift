@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Node {
     let name: String
@@ -13,7 +14,7 @@ struct Node {
     let image: UIImage
 }
 
-static let nodes = [
+let nodes = [
     Node(name: "nose01", vertex: 6, image: UIImage(named: "nose01")!),
     Node(name: "nose02", vertex: 6, image: UIImage(named: "nose02")!),
     Node(name: "nose03", vertex: 6, image: UIImage(named: "nose03")!),
