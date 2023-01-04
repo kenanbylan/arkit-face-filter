@@ -1,4 +1,5 @@
 import SceneKit
+import ARKit
 
 class FaceNode: SCNNode {
     
@@ -27,8 +28,12 @@ class FaceNode: SCNNode {
 extension FaceNode {
     
     
-    func updatePosition(for vectors: [vector_float3]) {
-        let newPos = vectors.reduce(vector_float3(), +) / Float(vectors.count)
+    func updatePosition(anchor: ARFaceAnchor) {
+        let vertices = [anchor.geometry.vertices[node.vertex[0]]]
+        var newPos = vertices.reduce(vector_float3(), +) / Float(vertices.count)
+        if node.name == "hat" {
+            newPos.y += 0.1
+        }
         position = SCNVector3(newPos)
     }
     
@@ -39,6 +44,8 @@ extension FaceNode {
         if let plane = geometry as? SCNPlane {
             plane.firstMaterial?.diffuse.contents = self.node.image
             plane.firstMaterial?.isDoubleSided = true
+            plane.height = self.node.size
+            plane.width = self.node.size
         }
     }
 }

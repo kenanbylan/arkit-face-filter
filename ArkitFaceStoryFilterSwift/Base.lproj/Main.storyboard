@@ -77,8 +77,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="maL-tI-i84">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="maL-tI-i84">
                                 <rect key="frame" x="0.0" y="59" width="393" height="710"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="discoverCell" rowHeight="397" id="5aC-cs-ZSc" customClass="DiscoverCell" customModule="ArkitFaceStoryFilterSwift" customModuleProvider="target">
@@ -101,18 +102,18 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.arrow.down.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="URv-lY-iYb">
                                                     <rect key="frame" x="20" y="50" width="353" height="335.66666666666669"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="353" id="0Zd-eT-EDj"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="353" id="bEj-Xz-ibW"/>
-                                                        <constraint firstAttribute="height" constant="336" id="sjb-C3-8Kt"/>
+                                                        <constraint firstAttribute="height" constant="336" id="FM9-mX-GIG"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="353" id="cDe-jX-lmG"/>
+                                                        <constraint firstAttribute="width" constant="353" id="qk1-D5-PPA"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="URv-lY-iYb" firstAttribute="bottom" secondItem="cev-oX-7Cu" secondAttribute="bottomMargin" id="Rb0-U1-KQV"/>
-                                                <constraint firstItem="pUr-dr-HBf" firstAttribute="leading" secondItem="cev-oX-7Cu" secondAttribute="leadingMargin" id="V0H-xq-anI"/>
-                                                <constraint firstItem="pUr-dr-HBf" firstAttribute="top" secondItem="cev-oX-7Cu" secondAttribute="topMargin" id="fCp-2E-cWM"/>
-                                                <constraint firstItem="pUr-dr-HBf" firstAttribute="leading" secondItem="URv-lY-iYb" secondAttribute="leading" id="g45-Ev-dKh"/>
-                                                <constraint firstItem="URv-lY-iYb" firstAttribute="top" secondItem="pUr-dr-HBf" secondAttribute="bottom" constant="8" symbolic="YES" id="ijC-L9-guR"/>
+                                                <constraint firstItem="URv-lY-iYb" firstAttribute="bottom" secondItem="cev-oX-7Cu" secondAttribute="bottomMargin" id="9k4-4B-3Bn"/>
+                                                <constraint firstItem="URv-lY-iYb" firstAttribute="leading" secondItem="pUr-dr-HBf" secondAttribute="leading" id="HfG-k9-q6l"/>
+                                                <constraint firstItem="pUr-dr-HBf" firstAttribute="top" secondItem="cev-oX-7Cu" secondAttribute="topMargin" id="XVx-Hd-Fm7"/>
+                                                <constraint firstItem="pUr-dr-HBf" firstAttribute="leading" secondItem="cev-oX-7Cu" secondAttribute="leadingMargin" id="ocq-M3-cXD"/>
+                                                <constraint firstItem="URv-lY-iYb" firstAttribute="top" secondItem="pUr-dr-HBf" secondAttribute="bottom" constant="8" symbolic="YES" id="qdO-Nb-rtB"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -125,12 +126,6 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cL5-9H-HVc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="maL-tI-i84" firstAttribute="leading" secondItem="aaX-Si-xdg" secondAttribute="leading" id="7rL-ju-b1G"/>
-                            <constraint firstAttribute="trailing" secondItem="maL-tI-i84" secondAttribute="trailing" id="HNs-io-wwC"/>
-                            <constraint firstItem="maL-tI-i84" firstAttribute="top" secondItem="cL5-9H-HVc" secondAttribute="top" id="PRE-9j-m3O"/>
-                            <constraint firstItem="maL-tI-i84" firstAttribute="bottom" secondItem="cL5-9H-HVc" secondAttribute="bottom" id="yKT-Tz-ui4"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Discover" image="f.circle.fill" catalog="system" id="gvG-qr-Jnm"/>
                     <connections>
@@ -243,8 +238,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6sw-Cv-t39" customClass="ARSCNView">
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6sw-Cv-t39" customClass="ARSCNView">
                                 <rect key="frame" x="0.0" y="75" width="393" height="564"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </sceneKitView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" fixedFrame="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="e0M-Fc-5d9">
                                 <rect key="frame" x="0.0" y="647" width="393" height="122"/>
@@ -271,12 +267,6 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="8Si-XL-HaC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="8Si-XL-HaC" firstAttribute="bottom" secondItem="6sw-Cv-t39" secondAttribute="bottom" id="0AW-NC-gjw"/>
-                            <constraint firstItem="6sw-Cv-t39" firstAttribute="top" secondItem="pzj-sJ-kfv" secondAttribute="topMargin" constant="-28" id="1iB-hc-kuk"/>
-                            <constraint firstItem="6sw-Cv-t39" firstAttribute="leading" secondItem="8Si-XL-HaC" secondAttribute="leading" id="GbA-xn-xpH"/>
-                            <constraint firstItem="6sw-Cv-t39" firstAttribute="centerX" secondItem="pzj-sJ-kfv" secondAttribute="centerX" id="Viv-Lz-AJX"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xhu-d4-5KB"/>
                     <connections>

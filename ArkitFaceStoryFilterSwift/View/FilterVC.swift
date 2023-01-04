@@ -10,7 +10,7 @@ import ARKit
 import SpriteKit
 
 
-class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate{
+class FilterVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate {
     
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -37,12 +37,6 @@ class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigat
         sceneView.isUserInteractionEnabled = true //tiklanabilir yaptik.
         
         navigationController?.navigationBar.topItem?.rightBarButtonItem =  UIBarButtonItem(title: "Save Photo", style: .plain, target: self, action: #selector(savePhoto))
-        
-        
-        if let filterName = filterName {
-            print("Secilen yüz noktası  :" , filterName)
-        }
-        
     }
     
     
@@ -50,9 +44,6 @@ class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigat
     @objc func savePhoto(){
         //savePhoto
         print("add photo and select index = 0.")
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,30 +63,10 @@ class FilterVC: UIViewController   ,  UIImagePickerControllerDelegate, UINavigat
         sceneView.session.pause()
     }
     
-    
-    
-    /*
-     @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
-     let location = sender.location(in: sceneView)
-     let results = sceneView.hitTest(location, options: nil)
-     if let result = results.first,
-     let node = result.node as? FaceNode {
-     node.next()
-     }
-     }
-     */
-    
-    
-    
-    
-    
-    
     func updateFeatures(for node: SCNNode, using anchor: ARFaceAnchor) {
-        print("featureIndices :" ,featureIndices)
         for (feature, indices) in zip(features, featureIndices) {
             let child = node.childNode(withName: feature, recursively: false) as? FaceNode
-            let vertices = indices.map { anchor.geometry.vertices[$0] }
-            child?.updatePosition(for: vertices)
+            child?.updatePosition(anchor: anchor)
         }
     }
     
@@ -117,9 +88,8 @@ extension FilterVC: ARSCNViewDelegate {
         let faceGeometry = ARSCNFaceGeometry(device: device)
         let node = SCNNode(geometry: faceGeometry)
         node.geometry?.firstMaterial?.fillMode = .lines
-        //node.geometry?.firstMaterial?.transparency = 0.0
+        node.geometry?.firstMaterial?.transparency = 0.0
         
-        let noseNode = FaceNode(with: nodes[0])
         self.node.name = "nose"
         node.addChildNode(self.node)
         
