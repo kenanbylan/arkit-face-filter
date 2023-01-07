@@ -19,6 +19,7 @@
 		6E5B6F5F295777BE000E04E2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 6E5B6F5E295777BE000E04E2 /* FirebaseFirestore */; };
 		6E5B6F61295777BE000E04E2 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 6E5B6F60295777BE000E04E2 /* FirebaseStorage */; };
 		6E5B6F632957815C000E04E2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5B6F622957815C000E04E2 /* User.swift */; };
+		6E6A8D0E2969F2F60092B1F9 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6A8D0D2969F2F60092B1F9 /* Post.swift */; };
 		6E7290AA295B32D7003218AF /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7290A9295B32D7003218AF /* TableViewController.swift */; };
 		6E7290AC295B6EE4003218AF /* DiscoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7290AB295B6EE4003218AF /* DiscoverCell.swift */; };
 		6E7C9408295435020027DA21 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7C9407295435020027DA21 /* LoginVC.swift */; };
@@ -40,6 +41,7 @@
 		6E459DEC295C54D9001F629B /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		6E5B6F53295776FD000E04E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6E5B6F622957815C000E04E2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		6E6A8D0D2969F2F60092B1F9 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		6E7290A9295B32D7003218AF /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		6E7290AB295B6EE4003218AF /* DiscoverCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCell.swift; sourceTree = "<group>"; };
 		6E7C9407295435020027DA21 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 			children = (
 				6E5B6F622957815C000E04E2 /* User.swift */,
 				6E945CB6295C19B6000770E2 /* Node.swift */,
+				6E6A8D0D2969F2F60092B1F9 /* Post.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				6E14AAC8295AFBD000AD54FD /* FilterVC.swift in Sources */,
 				6E7290AC295B6EE4003218AF /* DiscoverCell.swift in Sources */,
 				6E945CB7295C19B6000770E2 /* Node.swift in Sources */,
+				6E6A8D0E2969F2F60092B1F9 /* Post.swift in Sources */,
 				6E9B7D3F2953829D003DFF20 /* AppDelegate.swift in Sources */,
 				A249B31B296209CE00CE82B4 /* FilterCollectionViewCell.swift in Sources */,
 				6E7290AA295B32D7003218AF /* TableViewController.swift in Sources */,

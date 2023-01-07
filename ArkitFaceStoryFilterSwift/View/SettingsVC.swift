@@ -11,8 +11,8 @@ class SettingsVC: UIViewController {
     
     
     @IBOutlet weak var usernameLabel: UILabel!
-    
     @IBOutlet weak var emailLabel: UILabel!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,15 +20,21 @@ class SettingsVC: UIViewController {
         // Do any additional setup after loading the view.
         
         
-        usernameLabel.text = "test"
-        emailLabel.text = "testing"
+        getUserInfo()
         
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+   
+    
+    
+    
+    func getUserInfo() {
         
+        usernameLabel.text = UserSignleton.sharedUserInfo.username
+        emailLabel.text = UserSignleton.sharedUserInfo.email
         
     }
+    
     
     
     @IBAction func logoutClicked(_ sender: Any) {

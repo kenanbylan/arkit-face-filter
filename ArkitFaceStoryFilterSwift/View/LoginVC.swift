@@ -64,7 +64,6 @@ class LoginVC: UIViewController {
                 
                 let firestore = Firestore.firestore()
                 let userDictionary = ["email" : self.emailTextField.text!, "username" : self.usernameTextField.text!] as? [String : Any]
-                
                 firestore.collection("UserData").addDocument(data: userDictionary!) { error in
                     
                     if error != nil {
@@ -72,10 +71,12 @@ class LoginVC: UIViewController {
                     }
                 }
                 
+                
                 self.performSegue(withIdentifier: "toFeedVC", sender: nil)
                 
             }
         }else {
+            
             self.makeAlert(title: "Error", message: "Email or Password or Username is Empty.")
         }
     }

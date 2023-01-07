@@ -13,6 +13,7 @@ class UserSignleton {
     
     var email = ""
     var password = ""
+    var username = ""
     private init(){
         
     }

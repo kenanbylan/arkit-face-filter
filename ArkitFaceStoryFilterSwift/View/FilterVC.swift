@@ -7,10 +7,12 @@
 import UIKit
 import SceneKit
 import ARKit
-import SpriteKit
+import Firebase
+import FirebaseStorage
 
 
 class FilterVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate {
+    
     
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -19,6 +21,10 @@ class FilterVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     var node = FaceNode(with: nodes[0])
     let features = ["nose"]
     var featureIndices = [[6]]  //for nose
+    
+    
+    var image = UIImage()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +50,115 @@ class FilterVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     @objc func savePhoto(){
         //savePhoto
         print("add photo and select index = 0.")
+        
+        image  = sceneView.snapshot()
+        
+        uploadFirebase()
+        
+    }
+    
+    
+    func uploadFirebase(){
+        
+        
+        let storage = Storage.storage()
+        let storageReference = storage.reference() //?
+        let mediaFolder = storageReference.child("media")
+        
+        if let data = image.jpegData(compressionQuality: 0.5) {
+            
+            let uuid = UUID().uuidString
+            let imageReference = mediaFolder.child("\(uuid).jpg")
+            
+            imageReference.putData(data,metadata: nil) { metaData, error in
+                
+                if error != nil {
+                    self.makeAlert(title: "Error!!!", message: error?.localizedDescription ?? "Error!")
+                } else {
+                    
+                    imageReference.downloadURL { url, error in
+                        
+                        if error == nil {
+                            
+                            let imageUrl = url?.absoluteString
+                            //Firestore Processing
+                            let fireStore = Firestore.firestore()
+                            
+                            
+                            fireStore.collection("Snaps").whereField("snapOwner", isEqualTo: UserSignleton.sharedUserInfo.username).getDocuments { snapshot, error in
+                                
+                                if error != nil {
+                                    self.makeAlert(title: "Error", message: error?.localizedDescription ?? "Error Localize")
+                                } else {
+                                    
+                                    if snapshot?.isEmpty == false && snapshot != nil {
+                                        
+                                        for document in snapshot!.documents {
+                                            
+                                            let documentId = document.documentID
+                                            
+                                            if var imageUrlArray = document.get("imageUrlArray") as? [String] {
+                                                
+                                                imageUrlArray.append(imageUrl!)
+                                                
+                                                let additionalDictionary = ["imageUrlArray" : imageUrlArray] as? [String:Any]
+                                                
+                                                
+                                                fireStore.collection("Snaps").document(documentId).setData(additionalDictionary!, merge: true) { error in
+                                                    
+                                                    if error == nil {
+                                                        self.tabBarController?.selectedIndex = 0
+                                                        self.image = UIImage(systemName:"plus.square.fill.on.square.fill")!
+                                                        
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        
+                                    } else {
+                                        
+                                        let snapDictionary = ["imageUrlArray" : [imageUrl!], "snapOwner" : UserSignleton.sharedUserInfo.username , "date" : FieldValue.serverTimestamp()   ] as [String : Any]
+                                        
+                                        fireStore.collection("Snaps").addDocument(data: snapDictionary) { error in
+                                            
+                                            if error != nil {
+                                                self.makeAlert(title: "Error", message:error?.localizedDescription ?? "Error")
+                                            } else {
+                                                
+                                                self.tabBarController?.selectedIndex = 0
+                                                self.image = UIImage(systemName:"plus.square.fill.on.square.fill")!
+                                                
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                                
+                            }
+                        }
+                        
+                    }
+                    
+                    
+                }
+                
+                
+                
+            }
+            
+        }
+        
+        
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +185,17 @@ class FilterVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         }
     }
     
+    
+    func makeAlert(title:String, message : String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let okButton = UIAlertAction(title: "Ok", style: UIAlertAction.Style.destructive)
+        alert.addAction(okButton)
+        self.present(alert, animated: true)
+        
+    }
+    
+    
+    
 }
 
 extension FilterVC: ARSCNViewDelegate {
@@ -78,7 +204,6 @@ extension FilterVC: ARSCNViewDelegate {
         
         let device: MTLDevice!
         device = MTLCreateSystemDefaultDevice()
-        
         
         
         //face anchor done.
