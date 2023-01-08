@@ -11,5 +11,5 @@ struct Post {
 
     var username : String
     var imageUrlArray : [String]
-    
+    var index = 0
 }

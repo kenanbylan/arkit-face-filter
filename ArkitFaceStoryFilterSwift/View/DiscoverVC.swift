@@ -101,7 +101,7 @@ class DiscoverVC: UIViewController , UITableViewDelegate,  UITableViewDataSource
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "discoverCell", for: indexPath) as! DiscoverCell
         cell.usernameLabel.text = postArray[indexPath.row].username
-        cell.imageViewCell.sd_setImage(with: URL(string: postArray[indexPath.row].imageUrlArray[0]))
+        cell.imageViewCell.sd_setImage(with: URL(string: postArray[indexPath.row].imageUrlArray[postArray[indexPath.row].index]))
         return cell
         
         
@@ -110,6 +110,16 @@ class DiscoverVC: UIViewController , UITableViewDelegate,  UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return postArray.count;
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? DiscoverCell else {
+            return
+        }
+        
+        postArray[indexPath.row].index = postArray[indexPath.row].index == postArray[indexPath.row].imageUrlArray.count-1 ? 0 : postArray[indexPath.row].index+1
+        
+        cell.imageViewCell.sd_setImage(with: URL(string: postArray[indexPath.row].imageUrlArray[postArray[indexPath.row].index]))
     }
     
     func makeAlert(title:String, message : String){
