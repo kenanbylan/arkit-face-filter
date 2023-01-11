@@ -16,6 +16,8 @@ struct Node {
 }
 
 let nodes = [
+    Node(name: "eye", vertex: [1064], image: UIImage(named: "eye")!, size: 0.06),
+    Node(name: "heart", vertex: [600], image: UIImage(named: "heart")!, size: 0.03),
     Node(name: "nose01", vertex: [6], image: UIImage(named: "nose01")!, size: 0.06),
     Node(name: "nose02", vertex: [6], image: UIImage(named: "nose02")!, size: 0.06),
     Node(name: "nose03", vertex: [6], image: UIImage(named: "nose03")!, size: 0.06),

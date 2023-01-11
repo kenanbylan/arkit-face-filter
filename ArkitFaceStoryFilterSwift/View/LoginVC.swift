@@ -55,7 +55,7 @@ class LoginVC: UIViewController {
     
     @IBAction func SignUpClicked(_ sender: Any) {
         
-        if emailTextField.text != nil  && passwordTextField.text != nil  {
+        if emailTextField.text != nil  && passwordTextField.text != nil && usernameTextField.text !=  nil  {
             Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) { result, error in
                 
                 if error != nil {

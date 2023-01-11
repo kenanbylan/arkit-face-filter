@@ -19,7 +19,7 @@ class FilterVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     var filterName: String? = nil  //table sayfasından seçilen yüz noktası.
     
     var node = FaceNode(with: nodes[0])
-    let features = ["nose"]
+    
     var featureIndices = [[6]]  //for nose
     
     
@@ -40,7 +40,6 @@ class FilterVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         collectionView.dataSource = self
         
         sceneView.delegate = self
-        sceneView.isUserInteractionEnabled = true //tiklanabilir yaptik.
         
         navigationController?.navigationBar.topItem?.rightBarButtonItem =  UIBarButtonItem(title: "Save Photo", style: .plain, target: self, action: #selector(savePhoto))
     }
@@ -132,33 +131,12 @@ class FilterVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
                                         }
                                     }
                                 }
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
                             }
                         }
-                        
                     }
-                    
-                    
                 }
-                
-                
-                
             }
-            
         }
-        
-        
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -179,10 +157,8 @@ class FilterVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
     }
     
     func updateFeatures(for node: SCNNode, using anchor: ARFaceAnchor) {
-        for (feature, indices) in zip(features, featureIndices) {
-            let child = node.childNode(withName: feature, recursively: false) as? FaceNode
-            child?.updatePosition(anchor: anchor)
-        }
+        let child = node.childNode(withName: "node", recursively: false) as? FaceNode
+        child?.updatePosition(anchor: anchor)
     }
     
     
@@ -193,8 +169,6 @@ class FilterVC: UIViewController, UIImagePickerControllerDelegate, UINavigationC
         self.present(alert, animated: true)
         
     }
-    
-    
     
 }
 
@@ -213,9 +187,9 @@ extension FilterVC: ARSCNViewDelegate {
         let faceGeometry = ARSCNFaceGeometry(device: device)
         let node = SCNNode(geometry: faceGeometry)
         node.geometry?.firstMaterial?.fillMode = .lines
-        node.geometry?.firstMaterial?.transparency = 0.0
+        //node.geometry?.firstMaterial?.transparency = 0.0
         
-        self.node.name = "nose"
+        self.node.name = "node"
         node.addChildNode(self.node)
         
         updateFeatures(for: node, using: faceAnchor)
